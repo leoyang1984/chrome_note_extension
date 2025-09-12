@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易笔记</title>
+    <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <h1>📝 简易笔记</h1>
+                <div class="header-actions">
+                    <button id="settingsBtn" class="settings-btn" title="Logseq设置">⚙️</button>
+                    <button id="updateBtn" class="btn btn-secondary" title="更新页面信息">🔄</button>
+                </div>
+            </div>
+            <button id="saveToLogseqBtn" class="btn btn-primary" title="保存到Logseq">💾 保存到Logseq</button>
+        </header>
+
+        <main class="main-content">
+            <div class="view-tabs">
+                <button id="editTab" class="tab-button active" data-view="edit">编辑</button>
+                <button id="previewTab" class="tab-button" data-view="preview">预览</button>
+                <button id="deepseekTab" class="tab-button" data-view="deepseek">DeepSeek</button>
+            </div>
+
+            <div class="input-group">
+                <label for="noteTitle">标题</label>
+                <input type="text" id="noteTitle" placeholder="输入笔记标题..." maxlength="100">
+            </div>
+
+            <div id="editView" class="view-content active">
+                <div class="input-group">
+                    <label for="noteContent">内容</label>
+                    <textarea id="noteContent" placeholder="开始记录你的笔记..." rows="12"></textarea>
+                </div>
+            </div>
+
+            <div id="previewView" class="view-content">
+                <div class="preview-container">
+                    <div id="markdownPreview" class="markdown-preview"></div>
+                </div>
+            </div>
+
+
+            <div id="deepseekView" class="view-content">
+                <div class="deepseek-chat-container">
+                    <div class="deepseek-header">
+                        <h3>DeepSeek AI 助手</h3>
+                        <button id="deepseekConfigBtn" class="btn btn-secondary btn-sm" title="设置API密钥">⚙️</button>
+                    </div>
+                    
+                    <div id="deepseekChat" class="deepseek-chat-messages">
+                        <div class="message ai-message">
+                            <div class="message-content">
+                                <p>您好！我是DeepSeek AI助手，可以帮您翻译英文内容或回答其他问题。请告诉我您需要什么帮助？</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="deepseek-input-area">
+                        <div class="input-group">
+                            <input type="text" id="deepseekInput" placeholder="输入您的问题..." class="deepseek-input" maxlength="500">
+                            <button id="deepseekSend" class="btn btn-primary deepseek-send-btn">
+                                <span class="send-text">发送</span>
+                                <span class="loading-text" style="display: none;">发送中...</span>
+                            </button>
+                        </div>
+                        <div class="input-hint">
+                            按 Enter 发送，Shift + Enter 换行
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metadata">
+                <div class="metadata-item">
+                    <span class="label">来源:</span>
+                    <span id="pageUrl" class="value">正在获取...</span>
+                </div>
+                <div class="metadata-item">
+                    <span class="label">时间:</span>
+                    <span id="currentTime" class="value"></span>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="status" id="statusMessage"></div>
+        </footer>
+    </div>
+
+    <!-- 设置模态框 -->
+    <div id="settingsModal" class="settings-modal">
+        <h2>⚙️ Logseq 设置</h2>
+        <form class="settings-form">
+            <div class="input-group">
+                <label for="logseqApiUrl">API 地址</label>
+                <input type="url" id="logseqApiUrl" placeholder="http://127.0.0.1:12316" required>
+            </div>
+            <div class="input-group">
+                <label for="logseqApiToken">API Token</label>
+                <input type="password" id="logseqApiToken" placeholder="输入Logseq API Token" required>
+            </div>
+            <div class="settings-actions">
+                <button type="button" id="testConnectionBtn" class="btn btn-secondary">测试连接</button>
+                <button type="button" id="cancelSettingsBtn" class="btn btn-secondary">取消</button>
+                <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+        </form>
+    </div>
+    <div id="modalOverlay" class="modal-overlay"></div>
+
+    <script src="marked.min.js"></script>
+    <script src="utils.js"></script>
+    <script src="deepseek.js"></script>
+    <script src="logseqService.js"></script>
+    <script src="sidepanel.js"></script>
+</body>
+</html>
