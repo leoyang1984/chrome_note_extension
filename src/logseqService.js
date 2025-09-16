@@ -89,11 +89,15 @@ class LogseqService {
     generateLogseqContent(noteData) {
         const { title, content } = noteData;
         
-        // 只包含标题和内容，属性通过properties参数单独设置
+        let formattedContent = content;
+        
+        // 如果有标题，先添加标题
         if (title) {
-            return `## ${title}\n\n${content}`;
+            formattedContent = `## ${title}\n\n${content}`;
         }
-        return content;
+        
+        // 将内容包装在markdown代码块中，确保在Logseq中正常显示
+        return `\`\`\`markdown\n${formattedContent}\n\`\`\``;
     }
 
     /**
