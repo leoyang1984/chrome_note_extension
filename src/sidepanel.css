@@ -361,6 +361,15 @@ body {
   font-weight: 700;
 }
 
+/* Loading text styles */
+.loading-text {
+  display: none;
+}
+
+.loading-text.active {
+  display: inline;
+}
+
 /* 元数据样式 */
 .metadata {
   margin-top: 24px;
